@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import { useState, useEffect } from 'react'
 import '../assets/Home.css';
 import QRCode from 'react-qr-code';
 
@@ -6,11 +6,20 @@ import QRCode from 'react-qr-code';
 const Home = () => {
   const [inputValue, setInputValue] = useState('')
   const [qrCode, setQrCode] = useState(null);
+  const [allQRCodes, setAllQRCodes] = useState([]);
   const [isHidden, setIsHidden] = useState(false);
 
 
+  useEffect(() => {
+    const savedQRCodes = localStorage.getItem('qrCode');
+    if (savedQRCodes) {
+      setAllQRCodes(JSON.parse(savedQRCodes)); 
+    }
+    console.log("All QR Codes state after loading from localStorage:", allQRCodes);
+  }, []);
+
   const handleInputChange = (e) => {
-    setInputValue(e.target.value)
+    setInputValue(e.target.value);
   }
 
   const handleClick = () => {
@@ -23,7 +32,21 @@ const Home = () => {
     setIsHidden(true);
   }
 
+const handleClickSave = () => {
+  let nextId = 1;
+  if (allQRCodes.length > 0) {
+    nextId = allQRCodes[0].id + 1;
+  }
+
+  const newCode = { id: nextId, value: qrCode };
+  const qrCodeSaveAll = [newCode, ...allQRCodes]; 
+  setAllQRCodes(qrCodeSaveAll);
+  localStorage.setItem('qrCode', JSON.stringify(qrCodeSaveAll));
+};
+
+
   return (
+    <>
     <div className="home-container">
       <h1>Welcome to the QR Code Generator</h1>
       <div className="home-main-2">
@@ -35,26 +58,54 @@ const Home = () => {
         value={inputValue}
         placeholder="Enter text or URL to generate QR Code"
         />
-        <button onClick={handleClick}>Generate QR Code</button>
+        <button onClick={handleClick} className='btn-primary'>Generate QR Code</button>
       </div>
       <div className='horizontal-line'></div>
       <div className="qr-display">
         <h3 hidden={isHidden}>QR Code will be displayed here</h3>
         {qrCode && (
+          <>
+          <div className="qr-container">
           <div className="qr-code">
             {/* QR Code will be displayed here */}
             <p>QR Code for: {qrCode}</p>
             <QRCode
               size={200}
-              style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+              style={{ height: "200px", maxWidth: "100%", width: "100%" }}
               value={qrCode}
               viewBox={`0 0 256 256`}
             />
           </div>
+          <button onClick={handleClickSave} className='btn-primary'>Save <br /> 🗐</button>
+          </div>
+          </>
         )}
         </div>
         </div>
     </div>
+
+          {allQRCodes.length === 0 ? (
+            <div className='qr-zero-history'>
+            <p>No QR Codes saved Yet</p></div>
+          ) : (
+          <div className="qr-history">
+          <h3>History</h3>
+            <ul>
+              {allQRCodes.map((code) => (
+                <li key={code.id}>
+                  <QRCode
+                    size={100}
+                    style={{ height: "150px", maxWidth: "100%", width: "100%" }}
+                    value={code.value}
+                    viewBox={`0 0 256 256`}
+                  />
+                  <p>{code.value}</p>
+                </li>
+              ))}
+            </ul></div>
+          )}
+        
+    </>
   )
 }
 

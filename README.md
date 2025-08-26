@@ -1,6 +1,10 @@
 # QR CODE GENERATOR
 A simplest QR CODE GENERATOR to make work easy for you which is totally built on react.
 
+**What we have used**  
+localStorage (to store previous QRCode)  
+React (using vite)  
+
 ## How to SetUp Code  
 First you have to clone or fork the project to get a copy of a code then you have to run  
   

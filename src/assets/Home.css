@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   width: 80vw;
-  background-color: #c490e2;
+  background-color: rgb(241, 224, 255);
   margin: 20px auto;
   height: 70vh;
   border-radius: 20px;
@@ -27,7 +27,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  background-color: #c490e2;
+  background-color: rgb(241, 224, 255);
   width: 30vw;
   padding: 20px;
   border-radius: 10px;
@@ -43,7 +43,7 @@
   margin-bottom: 10px;
 }
 
-.qr-generator button {
+.btn-primary {
   padding: 10px 15px;
   background-color: #7100b3;
   color: white;
@@ -52,7 +52,7 @@
   cursor: pointer;
 }
 
-.qr-generator button:hover {
+.btn-primary:hover {
   background-color: #5a0088;
 }
 
@@ -71,4 +71,66 @@
   /* padding: 20px; */
   width: 30vw;
   height: 50vh;
+}
+
+.qr-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.qr-container button {
+  margin-top: 40px;
+}
+
+.qr-history {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(241, 224, 255);
+  width: 79vw;
+  margin: auto;
+  height: fit-content;
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.qr-history h2 {
+    color: #7100b3;
+}
+
+.qr-history ul {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-self: flex-start;
+}
+
+.qr-history ul li {
+  list-style: none;
+  width: 150px;
+}
+
+.qr-history ul li p {
+  list-style: none;
+  font-size: large;
+  text-align: center;
+  font-weight: bolder;
+  color: #7100b3;
+}
+
+.qr-zero-history {
+  width: 30vw;
+  text-align: center;
+  font-size: large;
+  font-weight: bolder;
+  height: 50px;
+  color: #7100b3;
+  background-color: rgb(241, 224, 255);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 100px;
+  margin-left: 20vh;
 }
