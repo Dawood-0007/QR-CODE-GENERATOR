@@ -134,3 +134,19 @@
   margin-bottom: 100px;
   margin-left: 20vh;
 }
+
+.delete-btn {
+  background: #5a0088;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  color: white;
+  font-size: large;
+  text-align: center;
+  width: 100%;
+}
+
+.delete-btn:hover {
+  color: #5a0088;
+  background: white;
+}
